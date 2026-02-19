@@ -25,8 +25,10 @@ export default function ProductDetails() {
 
   if (loading) {
     return (
-<div className="max-w-7xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <SkeletonCard />
+<div className="flex justify-center items-center min-h-screen">
+      <div className="w-full max-w-sm px-4">
+        <SkeletonCard />
+      </div>
     </div>
     );
   }
