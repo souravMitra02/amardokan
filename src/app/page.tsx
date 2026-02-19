@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
+import SkeletonCard from "@/components/SkeletonCard";
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]); 
@@ -21,9 +22,16 @@ export default function HomePage() {
     ? products 
     : products.filter((p) => p.category === category);
 
-  if (loading) return <div className="flex justify-center items-center min-h-screen font-bold text-xl">
-    লোড হচ্ছে...
-  </div>
+  if (loading) return <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+    </div>
 
   return (
     <main className="min-h-screen bg-gray-50 p-6">
