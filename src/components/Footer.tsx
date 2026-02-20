@@ -8,10 +8,12 @@ const Footer = () => {
         <footer className="bg-[#f8f9fa] text-gray-800 border-t border-gray-200 mt-auto">
             <div className="max-w-7xl mx-auto px-6 lg:px-16 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 <div className="flex flex-col space-y-4">
-                    <Link href="/" className="flex-shrink-0">
-            <span className="text-3xl font-black text-[#e21b1b] italic">
-              Amar<span className="text-[#facc15]">Dokan</span>
-            </span>
+                     <Link href="/" className="flex">
+            <div className="bg-white p-1 w rounded-sm">
+              <span className="text-2xl font-black text-[#e21b1b] px-1 italic">
+                Amar<span className="text-black">Dokan</span>
+              </span>
+            </div>
           </Link>
                     <p className="text-sm leading-relaxed text-gray-500 font-medium max-w-xs">
   Discover premium fashion and cutting-edge electronics all in one place. 

@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Product } from "@/types/product";
 import Image from "next/image";
 import SkeletonCard from "@/components/SkeletonCard";
+import { ArrowLeft, Star } from "lucide-react";
 
 
 export default function ProductDetails() {
@@ -34,17 +35,18 @@ export default function ProductDetails() {
   }
 
   if (!product) {
-    return <div className="text-center py-20">পণ্যটি পাওয়া যায়নি!</div>;
+    return <div className="text-center py-20">Products not found !!</div>;
   }
 
   return (
     <div className="max-w-6xl mx-auto p-6 md:p-12">
       <button 
-        onClick={() => router.back()}
-        className="mb-8 flex items-center gap-2 text-gray-600 hover:text-black transition font-medium"
-      >
-        ← ফিরে যান (Back)
-      </button>
+  onClick={() => router.back()}
+  className="mb-8 flex items-center gap-2 text-gray-600 hover:text-black transition font-medium group"
+>
+  <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+  Back
+</button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
         <div className="flex justify-center bg-gray-50 p-6 rounded-2xl">
@@ -66,9 +68,12 @@ export default function ProductDetails() {
           
           <div className="flex items-center gap-4">
             <span className="text-3xl font-bold text-gray-900">${product.price}</span>
-            <div className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-bold">
-              ⭐ {product.rating?.rate} ({product.rating?.count} reviews)
-            </div>
+            <div className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-bold flex items-center gap-1.5">
+  <Star size={14} fill="currentColor" className="text-yellow-600" />
+  <span>
+    {product.rating?.rate} <span className="text-yellow-600/60 font-medium ml-1">({product.rating?.count} reviews)</span>
+  </span>
+</div>
           </div>
 
           <p className="text-gray-600 leading-relaxed text-lg">

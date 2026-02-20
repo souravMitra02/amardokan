@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ShoppingCart, Search, User, Menu, MapPin, ChevronDown, Smartphone, Phone, Filter } from "lucide-react";
 import { useState } from "react";
-
 interface NavbarProps {
   onCategoryChange: (category: string) => void;
   currentCategory: string;
@@ -23,7 +22,6 @@ export default function Navbar({ onCategoryChange, currentCategory }: NavbarProp
 
   return (
     <header className="w-full font-sans sticky top-0 z-50 shadow-md">
-      {/* TOP RED SECTION */}
       <div className="bg-[#e21b1b] text-white py-3 px-4">
         <div className="max-w-[1400px] mx-auto flex items-center gap-4 lg:gap-6">
           <Link href="/" className="flex-shrink-0">
