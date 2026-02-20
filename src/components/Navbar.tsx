@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Search, User, Menu, MapPin, ChevronDown, Smartphone, Phone, Filter, X } from "lucide-react";
+import { ShoppingCart, Search, User, Menu, ChevronDown, Smartphone,  Filter, X } from "lucide-react";
 import { useState } from "react";
 
 interface NavbarProps {
