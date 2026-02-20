@@ -1,97 +1,135 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Search, User, Menu, MapPin, Phone } from "lucide-react";
+import { ShoppingCart, Search, User, Menu, MapPin, ChevronDown, Smartphone, Phone, Filter } from "lucide-react";
 import { useState } from "react";
 
-export default function Navbar() {
+interface NavbarProps {
+  onCategoryChange: (category: string) => void;
+  currentCategory: string;
+}
+
+export default function Navbar({ onCategoryChange, currentCategory }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
+  const categories = [
+    { id: "all", label: "All Products" },
+    { id: "electronics", label: "Electronics" },
+    { id: "jewelery", label: "Jewelery" },
+    { id: "men's clothing", label: "Men's Clothing" },
+    { id: "women's clothing", label: "Women's Clothing" },
+  ];
 
   return (
-    <header className="w-full">
-      <div className="bg-[#e21b1b] text-white py-1.5 px-4 text-xs flex justify-between items-center hidden md:flex font-medium">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1">
-            <MapPin size={14} /> <span>Delivery: 16469 (Inside Dhaka)</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Phone size={14} /> <span>Contact: info@amardokan.com</span>
-          </div>
-        </div>
-        <div className="flex gap-4 uppercase tracking-wider">
-          <Link href="/" className="hover:underline">Offers</Link>
-          <Link href="/" className="hover:underline">Help</Link>
-        </div>
-      </div>
-      <nav className="bg-[#f8f8f8] border-b sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center gap-4 md:gap-8">
-          
+    <header className="w-full font-sans sticky top-0 z-50 shadow-md">
+      {/* TOP RED SECTION */}
+      <div className="bg-[#e21b1b] text-white py-3 px-4">
+        <div className="max-w-[1400px] mx-auto flex items-center gap-4 lg:gap-6">
           <Link href="/" className="flex-shrink-0">
-            <span className="text-3xl font-black text-[#e21b1b] italic">
-              Amar<span className="text-[#facc15]">Dokan</span>
-            </span>
+            <div className="bg-white p-1 rounded-sm">
+              <span className="text-2xl font-black text-[#e21b1b] px-1 italic">
+                Amar<span className="text-black">Dokan</span>
+              </span>
+            </div>
           </Link>
-          <div className="hidden md:flex flex-1 relative group">
-            <input 
-              type="text" 
-              placeholder="Search for groceries, electronics or more..." 
-              className="w-full border-2 border-gray-200 rounded-full py-2.5 px-6 outline-none focus:border-[#e21b1b] transition-all text-sm shadow-sm"
-            />
-            <button className="absolute right-0 top-0 h-full bg-[#e21b1b] text-white px-6 rounded-r-full hover:bg-red-700 transition">
-              <Search size={20} />
-            </button>
+
+          <div className="flex-1 flex items-center">
+            <div className="flex w-full bg-white rounded-md overflow-hidden shadow-md">
+              <input 
+                type="text" 
+                placeholder="Search your products..." 
+                className="w-full py-2.5 px-4 text-gray-800 outline-none text-sm"
+              />
+              <button className="bg-[#facc15] hover:bg-[#eab308] text-gray-900 px-5 transition-colors">
+                <Search size={20} strokeWidth={3} />
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 md:gap-6">
-           <div className="hidden lg:flex items-center gap-3 border-2 border-gray-100 px-4 py-1.5 rounded-full cursor-pointer hover:border-[#e21b1b] hover:bg-red-50 transition-all duration-300 group">
-  <User size={18} className="text-gray-400 group-hover:text-[#e21b1b]" />
-  
-  <div className="flex flex-col items-start leading-tight">
-    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">
-      Welcome
-    </span>
-    <span className="text-xs font-black text-gray-700 group-hover:text-[#e21b1b]">
-      Login / Register
-    </span>
-  </div>
-</div>
-            <button className="flex items-center gap-2 bg-[#facc15] hover:bg-[#eab308] px-4 py-2.5 rounded-full transition shadow-sm group">
-              <div className="relative">
-                <ShoppingCart size={22} className="text-gray-900" />
-                <span className="absolute -top-3 -right-3 bg-[#e21b1b] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-[#facc15]">
-                  0
-                </span>
-              </div>
-              <span className="hidden sm:inline font-bold text-gray-900 text-sm">$0.00</span>
-            </button>
+          <div className="hidden xl:flex items-center gap-4">
+            <div className="flex items-center gap-2 bg-[#facc15] text-gray-900 px-3 py-1.5 rounded-md font-bold text-xs cursor-pointer hover:scale-105 transition shadow-sm">
+              <Smartphone size={16} />
+              <span>Download App Now</span>
+            </div>
+            <Link href="/login" className="flex items-center gap-2 border border-white/40 px-4 py-1.5 rounded-md font-bold text-sm hover:bg-white/10 transition">
+              <User size={18} />
+              <span>Sign in / Sign up</span>
+            </Link>
+          </div>
 
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-gray-700"
-            >
+          <div className="flex items-center gap-3 xl:hidden">
+            <div className="relative p-2">
+              <ShoppingCart size={24} />
+              <span className="absolute top-0 right-0 bg-[#facc15] text-black text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-[#e21b1b]">0</span>
+            </div>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-1">
               <Menu size={28} />
             </button>
           </div>
         </div>
+      </div>
+      <div className="bg-white border-b shadow-sm hidden md:block relative">
+        <div className="max-w-[1400px] mx-auto px-4 flex items-center justify-between py-1">
+          <div className="flex items-center gap-8 h-full">
+            
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsCategoryOpen(true)}
+              onMouseLeave={() => setIsCategoryOpen(false)}
+            >
+              <button className="flex items-center gap-2 font-black text-gray-800 uppercase text-sm border-r pr-6 border-gray-200 py-3 hover:text-[#e21b1b] transition-all">
+                <Menu size={18} />
+                Shop By Category
+                <ChevronDown size={14} className={`ml-1 transition-transform ${isCategoryOpen ? 'rotate-180' : ''}`} />
+              </button>
 
-        {/* Mobile Menu Dropdown */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t p-4 space-y-4 shadow-xl">
-             <div className="relative">
-                <input 
-                  type="text" 
-                  placeholder="Search..." 
-                  className="w-full border rounded-lg py-2 px-4 outline-none focus:border-[#e21b1b]"
-                />
-                <Search className="absolute right-3 top-2.5 text-gray-400" size={18} />
-             </div>
-             <div className="grid grid-cols-2 gap-4">
-                <Link href="/" className="p-3 bg-gray-50 rounded text-center font-bold text-sm">Offers</Link>
-                <Link href="/" className="p-3 bg-gray-50 rounded text-center font-bold text-sm">Categories</Link>
-             </div>
+              {isCategoryOpen && (
+                <div className="absolute top-full left-0 w-64 bg-white shadow-2xl border border-gray-100 py-3 animate-in fade-in slide-in-from-top-2 duration-200">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      onClick={() => {
+                        onCategoryChange(cat.id); 
+                        setIsCategoryOpen(false);
+                      }}
+                      className={`w-full text-left px-6 py-2.5 text-sm font-bold transition-all flex items-center justify-between
+                        ${currentCategory === cat.id 
+                          ? 'bg-red-50 text-[#e21b1b] border-l-4 border-[#e21b1b]' 
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-[#e21b1b]'}`}
+                    >
+                      {cat.label}
+                      {currentCategory === cat.id && <Filter size={14} />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <nav className="flex items-center gap-6 overflow-x-auto no-scrollbar">
+              {["Ramadan Special", "Great Deals", "Flash Sale", "Offers"].map((item) => (
+                <Link key={item} href="#" className="whitespace-nowrap text-xs font-black text-gray-700 uppercase hover:text-[#e21b1b] transition-colors tracking-tight">
+                  {item}
+                </Link>
+              ))}
+            </nav>
           </div>
-        )}
-      </nav>
+
+          <div className="flex items-center gap-6 text-gray-500 text-xs font-bold">
+            <Link href="#" className="flex items-center gap-1.5 hover:text-[#e21b1b]">
+              <MapPin size={14} /> Our outlets
+            </Link>
+            <Link href="#" className="flex items-center gap-1.5 hover:text-[#e21b1b]">
+              <Phone size={14} /> Help line: 16469
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </header>
   );
 }

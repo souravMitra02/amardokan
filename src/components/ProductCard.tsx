@@ -27,6 +27,7 @@ export default function ProductCard({ product }: { product: Product }) {
             >
                 View Details
             </Link>
+            
         </div>
     );
 }
