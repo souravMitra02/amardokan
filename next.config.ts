@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'fakestoreapi.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.pngmart.com',
+        pathname: '**',
       },
     ],
   },
