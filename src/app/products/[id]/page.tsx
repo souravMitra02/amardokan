@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Product } from "@/types/product";
 import Image from "next/image";
-import SkeletonCard from "@/components/SkeletonCard";
 import { ArrowLeft, Star, ShoppingCart, CreditCard, MessageCircle } from "lucide-react";
 
 export default function ProductDetails() {
